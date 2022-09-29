@@ -1,0 +1,30 @@
+Aex = 13e-12  //Como no especificaba he cogido los datos del problema standard4
+Msat = 800e3
+
+lex := sqrt(13e-12*2/(mu0*pow(800e3,2))) 
+
+i:=1
+TableAddVar(i, "d/lex", "adimensional")
+
+for i<=30 {
+
+d := i*lex    
+L := 5*d
+z := 0.1*d
+
+nx := pow(2,ilogb(L/(0.9*lex))+1)   
+ny := pow(2,ilogb(d/(0.9*lex))+1)
+
+SetGridSize(nx,ny,1)
+SetCellsize(L/nx,d/ny,z)
+
+m = Uniform(1,.1,0)  
+relax()
+
+save(m)
+tablesave()
+//print("<m> for d/lex=: ",i, m.average())
+
+i=i+1
+
+}

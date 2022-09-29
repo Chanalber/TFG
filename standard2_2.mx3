@@ -1,0 +1,31 @@
+//SetGridSize(256,32,1)
+//SetCellsize(150/256,30/32,3)
+
+
+
+Aex = 13e-12  //Como no especificaba he cogido los datos del problema standard4
+Msat = 800e3
+
+lex := sqrt(2*13e-12/(mu0*pow(800e3,2)))  //
+
+i=2
+for	i<30{
+
+d := 10*lex    
+L := 5*d
+t := 0.1*d
+
+nx := pow(2,ilogb(L/lex)+1)   
+ny := pow(2,ilogb(d/lex)+1)
+
+SetGridSize(nx,ny,1)
+SetCellsize(L/nx,d/ny,t)
+
+m = Uniform(1,.1,0)  //
+relax()
+
+save(m)
+TableAdd(m.average())
+print("<m> for d/lex=1: ", m.average())
+i=i+2
+ }
